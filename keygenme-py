@@ -1,0 +1,16 @@
+# downloads the files for the keygenme-py challenge from CMU's PicoCTF 2021
+echo downloading keygenme-py challenge...
+if test -d "keygenme-py";
+then
+echo "directory keygenme-py already exists"
+exit -1
+else
+echo "directory keygenme-py does not already exist"
+fi
+echo ""
+rm -rf keygenme-py
+mkdir keygenme-py
+wget -O keygenme-py/keygenme-trial.py "https://raw.githubusercontent.com/vivian-dai/PicoCTF2021-Writeup/main/Reverse%20Engineering/keygenme-py/keygenme-trial.py"
+printf '## picoCTF 2021: Reverse Engineering\n# keygenme.py\n\n**Points:** `30`\n\nSee if you can generate a valid license key for `keygenme-trial.py`\n\nUse `check_flag.py` to verify you found the correct flag.\n\n`python3 check_flag.py "YOUR_FLAG_HERE"`'>keygenme-py/challenge.md
+printf 'import hashlib,sys\nif hashlib.sha1(sys.argv[1].encode("UTF-8")).hexdigest() == "722d80bba48d648221041339cf5bd0cd622e1333":print("Congratulations! That is the correct flag!")\nelse:print("Incorrect flag :(")'>keygenme-py/check_flag.py
+echo "Done!"
