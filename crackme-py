@@ -1,0 +1,15 @@
+echo downloading crackme-py challenge...
+if test -d "crackme-py";
+then
+echo "directory crackme-py already exists"
+exit -1
+else
+echo "directory crackme-py does not already exist"
+fi
+echo ""
+rm -rf crackme-py
+mkdir crackme-py
+wget -O crackme-py/crackme.py "https://raw.githubusercontent.com/vivian-dai/PicoCTF2021-Writeup/main/Reverse%20Engineering/crackme-py/crackme.py"
+printf '## picoCTF 2021: Reverse Engineering\n# crackme.py\n\n**Points:** `30`\n\nHiding this really important number in an obscure piece of code is brilliant!\n\nAND it is encrypted!\n\nWe want our biggest client to know his information is safe with us.\n\nUse `check_flag.py` to verify you found the correct flag.\n\n`python3 check_flag.py "YOUR_FLAG_HERE"`'>crackme-py/challenge.md
+printf 'import hashlib,sys\nif hashlib.sha1(sys.argv[1].encode("UTF-8")).hexdigest() == "baf45bca31aa0385a3662ca9c17797ff914673f7":print("Congratulations! That is the correct flag!")\nelse:print("Incorrect flag :(")'>crackme-py/check_flag.py
+echo "Done!"
